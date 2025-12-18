@@ -24,17 +24,6 @@ def select_component(
         return random_component_name, builder(chat_args)
 
 def build_chat(chat_args: ChatArgs):
-    """
-    :param chat_args: ChatArgs object containing
-        conversation_id, pdf_id, metadata, and streaming flag.
-
-    :return: A chain
-
-    Example Usage:
-
-        chain = build_chat(chat_args)
-    """
-
     retriever_name, retriever = select_component(
         "retriever", retriever_map, chat_args
     )
@@ -57,5 +46,6 @@ def build_chat(chat_args: ChatArgs):
         llm=llm,
         condense_question_llm=condense_question_llm,
         memory=memory,
-        retriever=retriever
+        retriever=retriever,
+        metadata=chat_args.metadata,
     )

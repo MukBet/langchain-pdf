@@ -44,7 +44,9 @@ def score_conversation(
 
     score_conversation('abc123', 0.75, 'llm_info', 'retriever_info', 'memory_info')
     """
-
+    assert llm is not None, "llm is None"
+    assert score is not None, "score is None"
+    
     score = min(max(score, 0), 1)  # Clamp score between 0.0 and 1.0
     client.hincrby("llm_score_values", llm, score)
     client.hincrby("llm_score_counts", llm, 1)
